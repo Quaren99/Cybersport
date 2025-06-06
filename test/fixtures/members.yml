@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: one
+  team: one
+  joined: 2025-06-06
+  left: 2025-06-06
+
+two:
+  player: two
+  team: two
+  joined: 2025-06-06
+  left: 2025-06-06
