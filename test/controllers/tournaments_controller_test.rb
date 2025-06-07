@@ -12,7 +12,15 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tournament" do
     assert_difference("Tournament.count") do
-      post tournaments_url, params: { tournament: { date: @tournament.date, name: @tournament.name, prizepool: @tournament.prizepool, winner_id: @tournament.winner_id } }, as: :json
+      post tournaments_url,
+           params: {
+             tournament: {
+               date: @tournament.date,
+               name: @tournament.name,
+               prizepool: @tournament.prizepool,
+               winner_id: @tournament.winner_id
+             }
+           }, as: :json
     end
 
     assert_response :created
@@ -24,7 +32,15 @@ class TournamentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update tournament" do
-    patch tournament_url(@tournament), params: { tournament: { date: @tournament.date, name: @tournament.name, prizepool: @tournament.prizepool, winner_id: @tournament.winner_id } }, as: :json
+    patch tournament_url(@tournament),
+          params: {
+            tournament: {
+              date: @tournament.date,
+              name: @tournament.name,
+              prizepool: @tournament.prizepool,
+              winner_id: @tournament.winner_id
+            }
+          }, as: :json
     assert_response :success
   end
 

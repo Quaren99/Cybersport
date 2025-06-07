@@ -17,11 +17,13 @@ class TeamDetailedSerializer < ActiveModel::Serializer
 
   def history
     history = object.members.map do |member|
+      next unless member.left
+
       {
         player: member.player.nickname,
         joined: member.joined.strftime("%Y-%m-%d"),
         left: member.left.strftime("%Y-%m-%d")
-      } if member.left
+      }
     end
 
     history.compact!

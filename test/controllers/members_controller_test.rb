@@ -12,7 +12,13 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create member" do
     assert_difference("Member.count") do
-      post members_url, params: { member: { joined: @member.joined, left: @member.left, player_id: @member.player_id, team_id: @member.team_id } }, as: :json
+      post members_url,
+           params: { member: {
+             joined: @member.joined,
+             left: @member.left,
+             player_id: @member.player_id,
+             team_id: @member.team_id
+           } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +30,13 @@ class MembersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update member" do
-    patch member_url(@member), params: { member: { joined: @member.joined, left: @member.left, player_id: @member.player_id, team_id: @member.team_id } }, as: :json
+    patch member_url(@member),
+          params: { member: {
+            joined: @member.joined,
+            left: @member.left,
+            player_id: @member.player_id,
+            team_id: @member.team_id
+          } }, as: :json
     assert_response :success
   end
 

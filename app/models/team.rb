@@ -11,7 +11,7 @@ class Team < ApplicationRecord
 
   def sum_of_prizes
     total_prize = 0
-    self.participants.each do |participant|
+    participants.each do |participant|
       total_prize += participant.prize
     end
     total_prize

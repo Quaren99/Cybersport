@@ -8,16 +8,20 @@ class Player < ApplicationRecord
   validates :realname, presence: true
 
   def won_tournaments_count
-    teams_members = self.members.includes(:team)
+    teams_members = members.includes(:team)
     count = 0
     teams_members.each do |member|
       member.team.participants.each do |participant|
-        if participant.place == 1 && participant.tournament.date > member.joined && (member.left == nil || participant.tournament.date < member.left)
-          count += 1
-        end
+        count += 1 if participant.place == 1 && was_member?
       end
     end
 
     count
+  end
+
+  private
+
+  def was_member?
+    participant.tournament.date > member.joined && (member.left.nil? || participant.tournament.date < member.left)
   end
 end

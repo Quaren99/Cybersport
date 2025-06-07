@@ -12,7 +12,13 @@ class ParticipantsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create participant" do
     assert_difference("Participant.count") do
-      post participants_url, params: { participant: { place: @participant.place, prize: @participant.prize, team_id: @participant.team_id, tournament_id: @participant.tournament_id } }, as: :json
+      post participants_url,
+           params: { participant: {
+             place: @participant.place,
+             prize: @participant.prize,
+             team_id: @participant.team_id,
+             tournament_id: @participant.tournament_id
+           } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +30,13 @@ class ParticipantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update participant" do
-    patch participant_url(@participant), params: { participant: { place: @participant.place, prize: @participant.prize, team_id: @participant.team_id, tournament_id: @participant.tournament_id } }, as: :json
+    patch participant_url(@participant),
+          params: { participant: {
+            place: @participant.place,
+            prize: @participant.prize,
+            team_id: @participant.team_id,
+            tournament_id: @participant.tournament_id
+          } }, as: :json
     assert_response :success
   end
 

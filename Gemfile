@@ -46,6 +46,12 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "faker", "~> 3.5"
+gem "faker", "~> 3.5", require: false
 
 gem "active_model_serializers", "~> 0.10.15"
+
+gem "rubocop", "~> 1.76", require: false
+
+gem "rubocop-rails", "~> 2.32", require: false
+
+gem "rubocop-performance", "~> 1.25", require: false

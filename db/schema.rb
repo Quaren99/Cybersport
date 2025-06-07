@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_07_204149) do
   create_table "members", force: :cascade do |t|
     t.integer "player_id", null: false
     t.integer "team_id", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_participants_on_team_id"
+    t.index ["tournament_id", "place"], name: "index_participants_on_tournament_id_and_place", unique: true, where: "place IS NOT NULL"
     t.index ["tournament_id"], name: "index_participants_on_tournament_id"
   end
 
@@ -39,6 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["nickname"], name: "index_players_on_nickname", unique: true
   end
 
   create_table "teams", force: :cascade do |t|
@@ -47,6 +49,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.index ["name"], name: "index_teams_on_name", unique: true
+    t.index ["worldRanking"], name: "index_teams_on_worldRanking", unique: true
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -55,6 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
     t.integer "prizepool"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tournaments_on_name", unique: true
   end
 
   add_foreign_key "members", "players"

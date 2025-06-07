@@ -3,7 +3,7 @@ class PlayerSerializer < ActiveModel::Serializer
 
   def team
     name = object.members.where(left: nil).first&.team&.name
-    return name unless name.blank?
+    return name if name.present?
 
     "Free Agent"
   end
