@@ -1,7 +1,7 @@
 module Api
     module V1
       class PlayersController < ApplicationController
-        before_action :set_player, only: %i[ show update destroy ]
+        before_action :set_player, only: %i[ show]
 
         # GET /players
         def index
@@ -12,32 +12,7 @@ module Api
 
         # GET /players/1
         def show
-          render json: @player
-        end
-
-        # POST /players
-        def create
-          @player = Player.new(player_params)
-
-          if @player.save
-            render json: @player, status: :created, location: @player
-          else
-            render json: @player.errors, status: :unprocessable_entity
-          end
-        end
-
-        # PATCH/PUT /players/1
-        def update
-          if @player.update(player_params)
-            render json: @player
-          else
-            render json: @player.errors, status: :unprocessable_entity
-          end
-        end
-
-        # DELETE /players/1
-        def destroy
-          @player.destroy!
+          render json: @player, serializer: PlayerDetailedSerializer
         end
 
         private
