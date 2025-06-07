@@ -1,0 +1,32 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "cybersport/app/",
+            "color": "foldercolorizer.color_006633"
+        },
+        {
+            "folderPath": "cybersport/app/views/",
+            "color": "foldercolorizer.color_cc6600"
+        },
+        {
+            "folderPath": "cybersport/app/models/",
+            "color": "foldercolorizer.color_0066ff"
+        },
+        {
+            "folderPath": "cybersport/app/controllers/",
+            "color": "foldercolorizer.color_cc0066"
+        },
+        {
+            "folderPath": "cybersport/db/",
+            "color": "foldercolorizer.color_00cccc"
+        },
+        {
+            "folderPath": "cybersport/app/javascript/",
+            "color": "foldercolorizer.color_00ccff"
+        },
+        {
+            "folderPath": "cybersport/config/",
+            "color": "foldercolorizer.color_dddddd"
+        }
+    ]
+}

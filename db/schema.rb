@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_06_131859) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_06_203230) do
   create_table "members", force: :cascade do |t|
     t.integer "player_id", null: false
     t.integer "team_id", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_06_131859) do
     t.integer "worldRanking"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "tournaments", force: :cascade do |t|
