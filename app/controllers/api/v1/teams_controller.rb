@@ -12,7 +12,7 @@ module Api
 
         # GET /teams/1
         def show
-          render json: @team
+          render json: @team, serializer: TeamDetailedSerializer
         end
 
         private

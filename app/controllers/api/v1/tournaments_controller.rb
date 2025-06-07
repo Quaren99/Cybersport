@@ -12,7 +12,7 @@ module Api
 
         # GET /tournaments/1
         def show
-          render json: @tournament
+          render json: @tournament, serializer: TournamentDetailedSerializer
         end
 
         private
