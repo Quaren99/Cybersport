@@ -55,3 +55,5 @@ gem "rubocop", "~> 1.76", require: false
 gem "rubocop-rails", "~> 2.32", require: false
 
 gem "rubocop-performance", "~> 1.25", require: false
+
+gem "fasterer", "~> 0.11.0", require: false
