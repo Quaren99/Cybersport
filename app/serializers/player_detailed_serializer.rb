@@ -5,7 +5,7 @@ class PlayerDetailedSerializer < ActiveModel::Serializer
     name = object.members.where(left: nil).first&.team&.name
     return name if name.present?
 
-    "Free Agent"
+    I18n.t(:free_agent)
   end
 
   def history

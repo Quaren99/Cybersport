@@ -23,7 +23,7 @@ module Api
         ).limit(@limit).order(:name)
 
         if @tournaments.empty?
-          render json: { error: "No tournaments found" }, status: :not_found
+          render json: { error: I18n.t(:tournament_not_found) }, status: :not_found
         else
           render json: @tournaments
         end

@@ -22,7 +22,7 @@ module Api
         ).limit(@limit).order(:name)
 
         if @teams.empty?
-          render json: { error: "No teams found" }, status: :not_found
+          render json: { error: I18n.t(:team_not_found) }, status: :not_found
         else
           render json: @teams
         end

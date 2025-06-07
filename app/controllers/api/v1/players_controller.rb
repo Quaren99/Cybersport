@@ -23,7 +23,7 @@ module Api
         ).limit(@limit).order(:nickname)
 
         if @players.empty?
-          render json: { error: "No players found" }, status: :not_found
+          render json: { error: I18n.t(:player_not_found) }, status: :not_found
         else
           render json: @players
         end
