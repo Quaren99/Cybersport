@@ -1,29 +1,36 @@
 module Api
     module V1
       class TeamsController < ApplicationController
-        before_action :set_team, only: %i[ show]
-
         # GET /teams
         def index
-          @teams = Team.all
+          @teams = Team.all.limit(@@limit)
 
           render json: @teams
         end
 
         # GET /teams/1
         def show
+          set_team
           render json: @team, serializer: TeamDetailedSerializer
         end
 
+        def search
+          @teams = Team.search(
+            params: params.expect(team: [ :query, :worldRanking ]),
+            exact_filters: [ :worldRanking ],
+            text_fields: [ :name, :description ]
+          ).limit(@@limit).order(:name)
+
+          if @teams.empty?
+            render json: { error: "No teams found" }, status: :not_found
+          else
+            render json: @teams
+          end
+        end
+
         private
-          # Use callbacks to share common setup or constraints between actions.
           def set_team
             @team = Team.find(params.expect(:id))
-          end
-
-          # Only allow a list of trusted parameters through.
-          def team_params
-            params.expect(team: [ :name, :worldRanking ])
           end
       end
     end

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :tournaments
-      resources :teams
-      resources :players
+      get "teams/search" => "teams#search", as: :search_teams
+      get "players/search" => "players#search", as: :search_players
+      get "tournaments/search" => "tournaments#search", as: :search_tournaments
+      resources :tournaments, only: [ :index, :show ]
+      resources :teams, only: [ :index, :show ]
+      resources :players, only: [ :index, :show ]
     end
   end
 

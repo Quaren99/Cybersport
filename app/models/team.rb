@@ -1,4 +1,6 @@
 class Team < ApplicationRecord
+  include Searchable
+
   has_many :members, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :players, through: :members

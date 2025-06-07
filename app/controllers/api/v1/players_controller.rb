@@ -5,7 +5,7 @@ module Api
 
         # GET /players
         def index
-          @players = Player.all
+          @players = Player.all.limit(@@limit)
 
           render json: @players
         end
@@ -15,15 +15,23 @@ module Api
           render json: @player, serializer: PlayerDetailedSerializer
         end
 
+        def search
+          @players = Player.search(
+            params: params.expect(player: [ :query, :age ]),
+            exact_filters: [ :age ],
+            text_fields: [ :nickname, :realname ]
+          ).limit(@@limit).order(:nickname)
+
+          if @players.empty?
+            render json: { error: "No players found" }, status: :not_found
+          else
+            render json: @players
+          end
+        end
+
         private
-          # Use callbacks to share common setup or constraints between actions.
           def set_player
             @player = Player.find(params.expect(:id))
-          end
-
-          # Only allow a list of trusted parameters through.
-          def player_params
-            params.expect(player: [ :nickname, :realname, :age ])
           end
       end
     end

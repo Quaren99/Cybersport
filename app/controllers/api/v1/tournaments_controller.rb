@@ -5,7 +5,7 @@ module Api
 
         # GET /tournaments
         def index
-          @tournaments = Tournament.all
+          @tournaments = Tournament.all.limit(@@limit)
 
           render json: @tournaments
         end
@@ -15,8 +15,21 @@ module Api
           render json: @tournament, serializer: TournamentDetailedSerializer
         end
 
+        def search
+          @tournaments = Tournament.search(
+            params: params.expect(tournament: [ :query, :date, :prizepool ]),
+            exact_filters: [ :prizepool, :date ],
+            text_fields: [ :name ]
+          ).limit(@@limit).order(:name)
+
+          if @tournaments.empty?
+            render json: { error: "No tournaments found" }, status: :not_found
+          else
+            render json: @tournaments
+          end
+        end
+
         private
-          # Use callbacks to share common setup or constraints between actions.
           def set_tournament
             @tournament = Tournament.find(params.expect(:id))
           end

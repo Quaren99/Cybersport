@@ -1,4 +1,6 @@
 class Tournament < ApplicationRecord
+  include Searchable
+
   has_many :participants, dependent: :destroy
   has_many :teams, through: :participants
 
