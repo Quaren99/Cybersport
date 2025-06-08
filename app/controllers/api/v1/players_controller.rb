@@ -1,6 +1,6 @@
 module Api
   module V1
-    class PlayersController < APIController
+    class PlayersController < ApiController
       before_action :set_player, only: %i[show]
 
       # GET /players

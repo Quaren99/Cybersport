@@ -41,10 +41,12 @@ RSpec.describe "Teams API", swagger_doc: "v1/swagger.yaml", type: :request do # 
     get "Search teams" do
       tags "Teams"
       produces "application/json"
-      parameter name: :"team[query]", in: :query, type: :string, required: true
+      parameter name: :"team[query]", in: :query, type: :string, required: false
+      parameter name: :"team[worldRanking]", in: :query, type: :integer, required: false
 
       response "200", "teams found" do
         let(:"team[query]") { "Alpha" }
+        let(:"team[worldRanking]") { 1 }
         run_test! do
           expect(response.parsed_body.first["name"]).to eq("Team Alpha")
         end
@@ -52,6 +54,7 @@ RSpec.describe "Teams API", swagger_doc: "v1/swagger.yaml", type: :request do # 
 
       response "404", "no teams found" do
         let(:"team[query]") { "Nonexistent" }
+        let(:"team[worldRanking]") { 999 }
         run_test! do
           expect(response.parsed_body["error"]).to be_present
         end

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TournamentsController < APIController
+    class TournamentsController < ApiController
       before_action :set_tournament, only: %i[show]
 
       # GET /tournaments

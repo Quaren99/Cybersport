@@ -1,4 +1,4 @@
-class APIController < ActionController::API
+class ApiController < ActionController::API
   around_action :switch_locale
 
   @limit = 15

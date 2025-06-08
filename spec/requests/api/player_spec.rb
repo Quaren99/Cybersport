@@ -41,10 +41,12 @@ RSpec.describe "Players API", swagger_doc: "v1/swagger.yaml", type: :request do 
     get "Search players" do
       tags "Players"
       produces "application/json"
-      parameter name: :"player[query]", in: :query, type: :string, required: true
+      parameter name: :"player[query]", in: :query, type: :string, required: false
+      parameter name: :"player[age]", in: :query, type: :integer, required: false
 
       response "200", "players found" do
         let(:"player[query]") { "player_one" }
+        let(:"player[age]") { 20 }
         run_test! do
           expect(response.parsed_body.first["nickname"]).to eq("player_one")
         end
@@ -52,6 +54,7 @@ RSpec.describe "Players API", swagger_doc: "v1/swagger.yaml", type: :request do 
 
       response "404", "no players found" do
         let(:"player[query]") { "nonexistent" }
+        let(:"player[age]") { 99 }
         run_test! do
           expect(response.parsed_body["error"]).to be_present
         end

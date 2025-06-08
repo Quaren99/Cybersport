@@ -41,10 +41,14 @@ RSpec.describe "Tournaments API", swagger_doc: "v1/swagger.yaml", type: :request
     get "Search tournaments" do
       tags "Tournaments"
       produces "application/json"
-      parameter name: :"tournament[query]", in: :query, type: :string, required: true
+      parameter name: :"tournament[query]", in: :query, type: :string, required: false
+      parameter name: :"tournament[date]", in: :query, type: :string, format: :date, required: false
+      parameter name: :"tournament[prizepool]", in: :query, type: :integer, required: false
 
       response "200", "tournaments found" do
         let(:"tournament[query]") { "Major" }
+        let(:"tournament[date]") { Time.zone.today.to_s }
+        let(:"tournament[prizepool]") { 10_000 }
         run_test! do
           expect(response.parsed_body.first["name"]).to eq("Major 2024")
         end
@@ -52,6 +56,8 @@ RSpec.describe "Tournaments API", swagger_doc: "v1/swagger.yaml", type: :request
 
       response "404", "no tournaments found" do
         let(:"tournament[query]") { "Nonexistent" }
+        let(:"tournament[date]") { "1900-01-01" }
+        let(:"tournament[prizepool]") { 0 }
         run_test! do
           expect(response.parsed_body["error"]).to be_present
         end
