@@ -20,25 +20,25 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "🕑 Recent Tournaments" do
           table_for Tournament.order(date: :desc).limit(5) do
-            column("Name") { |t| t.name }
-            column("Date") { |t| t.date }
-            column("Prizepool") { |t| t.prizepool }
+            column("Name", &:name)
+            column("Date", &:date)
+            column("Prizepool", &:prizepool)
           end
         end
 
         panel "🏅 Top 5 Teams by World Ranking" do
           table_for Team.where.not(worldRanking: nil).order(:worldRanking).limit(5) do
-            column("Rank") { |team| team.worldRanking }
-            column("Name") { |team| team.name }
-            column("Description") { |team| team.description }
+            column("Rank", &:worldRanking)
+            column("Name", &:name)
+            column("Description", &:description)
           end
         end
 
         panel "🆕 Recently Joined Players" do
           table_for Player.order(created_at: :desc).limit(5) do
-            column("Nickname") { |p| p.nickname }
-            column("Real Name") { |p| p.realname }
-            column("Age") { |p| p.age }
+            column("Nickname", &:nickname)
+            column("Real Name", &:realname)
+            column("Age", &:age)
             column("Joined At") { |p| p.created_at.strftime("%Y-%m-%d") }
           end
         end
