@@ -5,7 +5,7 @@ module Api
 
       # GET /players
       def index
-        @players = Player.limit(@limit)
+        @players = Player.limit(@@limit)
 
         render json: @players
       end
@@ -20,7 +20,7 @@ module Api
           params: params.expect(player: %i[query age]),
           exact_filters: [:age],
           text_fields: %i[nickname realname]
-        ).limit(@limit).order(:nickname)
+        ).limit(@@limit).order(:nickname)
 
         if @players.empty?
           render json: { error: I18n.t(:player_not_found) }, status: :not_found

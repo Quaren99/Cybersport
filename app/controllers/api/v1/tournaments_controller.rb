@@ -5,7 +5,7 @@ module Api
 
       # GET /tournaments
       def index
-        @tournaments = Tournament.limit(@limit)
+        @tournaments = Tournament.limit(@@limit)
 
         render json: @tournaments
       end
@@ -20,7 +20,7 @@ module Api
           params: params.expect(tournament: %i[query date prizepool]),
           exact_filters: %i[prizepool date],
           text_fields: [:name]
-        ).limit(@limit).order(:name)
+        ).limit(@@limit).order(:name)
 
         if @tournaments.empty?
           render json: { error: I18n.t(:tournament_not_found) }, status: :not_found

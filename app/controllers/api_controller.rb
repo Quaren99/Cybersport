@@ -1,7 +1,7 @@
 class ApiController < ActionController::API
   around_action :switch_locale
 
-  @limit = 15
+  @@limit = 15
 
   def default_url_options
     { locale: I18n.locale }

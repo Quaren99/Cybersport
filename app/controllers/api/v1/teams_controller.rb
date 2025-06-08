@@ -3,7 +3,7 @@ module Api
     class TeamsController < ApiController
       # GET /teams
       def index
-        @teams = Team.limit(@limit)
+        @teams = Team.limit(@@limit)
 
         render json: @teams
       end
@@ -19,7 +19,7 @@ module Api
           params: params.expect(team: %i[query worldRanking]),
           exact_filters: [:worldRanking],
           text_fields: %i[name description]
-        ).limit(@limit).order(:name)
+        ).limit(@@limit).order(:name)
 
         if @teams.empty?
           render json: { error: I18n.t(:team_not_found) }, status: :not_found
