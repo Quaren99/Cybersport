@@ -7,6 +7,14 @@ class Player < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true
   validates :realname, presence: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id nickname realname age created_at updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[members teams]
+  end
+
   def won_tournaments_count
     teams_members = members.includes(:team)
     count = 0

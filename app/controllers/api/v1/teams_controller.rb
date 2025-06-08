@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TeamsController < ApplicationController
+    class TeamsController < APIController
       # GET /teams
       def index
         @teams = Team.limit(@limit)

@@ -77,3 +77,4 @@ end
 20.times do
   create_tournament
 end
+Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

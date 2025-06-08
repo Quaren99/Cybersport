@@ -30,5 +30,9 @@ module Cybersport
     config.api_only = true
     config.i18n.available_locales = [:en, :uk]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
   end
 end

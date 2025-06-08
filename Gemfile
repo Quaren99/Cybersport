@@ -61,3 +61,11 @@ gem "rubocop-rails", "~> 2.32", require: false
 gem "rubocop-performance", "~> 1.25", require: false
 
 gem "fasterer", "~> 0.11.0", require: false
+
+gem "activeadmin", "~> 3.3"
+
+gem "sprockets-rails", "~> 3.5"
+
+gem "sassc", "~> 2.4"
+
+gem "devise", "~> 4.9"
