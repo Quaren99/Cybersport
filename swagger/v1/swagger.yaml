@@ -1,0 +1,177 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/players":
+    get:
+      summary: Retrieves all players
+      tags:
+      - Players
+      responses:
+        '200':
+          description: players found
+    post:
+      summary: Creates a player
+      tags:
+      - Players
+      parameters: []
+      responses:
+        '201':
+          description: player created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                player:
+                  type: object
+                  properties:
+                    nickname:
+                      type: string
+                    realname:
+                      type: string
+                    age:
+                      type: integer
+                  required:
+                  - nickname
+                  - realname
+                  - age
+              required:
+              - player
+  "/api/v1/players/{id}":
+    get:
+      summary: Retrieves a player
+      tags:
+      - Players
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: player found
+        '404':
+          description: player not found
+    delete:
+      summary: Deletes a player
+      tags:
+      - Players
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: player deleted
+        '404':
+          description: player not found
+  "/api/v1/players/search":
+    get:
+      summary: Search players
+      tags:
+      - Players
+      parameters:
+      - name: player[query]
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: players found
+        '404':
+          description: no players found
+  "/api/v1/teams":
+    get:
+      summary: Retrieves all teams
+      tags:
+      - Teams
+      responses:
+        '200':
+          description: teams found
+  "/api/v1/teams/{id}":
+    get:
+      summary: Retrieves a team
+      tags:
+      - Teams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: team found
+        '404':
+          description: team not found
+  "/api/v1/teams/search":
+    get:
+      summary: Search teams
+      tags:
+      - Teams
+      parameters:
+      - name: team[query]
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: teams found
+        '404':
+          description: no teams found
+  "/api/v1/tournaments":
+    get:
+      summary: Retrieves all tournaments
+      tags:
+      - Tournaments
+      responses:
+        '200':
+          description: tournaments found
+  "/api/v1/tournaments/{id}":
+    get:
+      summary: Retrieves a tournament
+      tags:
+      - Tournaments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: tournament found
+        '404':
+          description: tournament not found
+  "/api/v1/tournaments/search":
+    get:
+      summary: Search tournaments
+      tags:
+      - Tournaments
+      parameters:
+      - name: tournament[query]
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: tournaments found
+        '404':
+          description: no tournaments found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
